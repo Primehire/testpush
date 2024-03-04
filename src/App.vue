@@ -1,19 +1,3 @@
-<script setup lang="ts">
-import { initializeApp } from 'firebase/app';
-const firebaseConfig = {
-  apiKey: 'AIzaSyC7ekuGlWdr8sWkWBcMzlerN1xf6qkySco',
-  authDomain: 'pushprimehire.firebaseapp.com',
-  projectId: 'pushprimehire',
-  storageBucket: 'pushprimehire.appspot.com',
-  messagingSenderId: '33985431746',
-  appId: '1:33985431746:web:20f55bd458562149b0535b',
-  measurementId: 'G-0FJH4J4C16',
-};
-
-const app = initializeApp(firebaseConfig);
-
-</script>
-
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
@@ -21,6 +5,25 @@ const app = initializeApp(firebaseConfig);
 
 
 </template>
+
+<script setup lang="ts">
+import { initializeApp } from 'firebase/app';
+const firebaseConfig = {
+  apiKey: "AIzaSyBo5mlbSmaf0aSempfeMTY8RQeSBfgkQlc",
+  authDomain: "testing-62acb.firebaseapp.com",
+  projectId: "testing-62acb",
+  storageBucket: "testing-62acb.appspot.com",
+  messagingSenderId: "195165267631",
+  appId: "1:195165267631:web:383052269d80aea630165a"
+};
+const vapidKey =
+  'BJkYOzEplaeK4snOYdP9m2GT380XB8fKOfSBOVsbOY8S2vfwPzmeysZUC41p3lESHLzpYCxx9Il-t-WSGIp92ww';
+
+const app = initializeApp(firebaseConfig);
+console.log(app);
+</script>
+
+
 
 <style scoped>
 header {
