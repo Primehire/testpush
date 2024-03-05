@@ -3,7 +3,7 @@
     {{ msg }}
   </div>
   <button class="button" @click="showPrompt">
-
+    showPrompt
   </button>
 
 
