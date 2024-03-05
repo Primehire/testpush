@@ -15,8 +15,8 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import { ref } from 'vue';
 function showPrompt() {
-  console.log(window.OneSignal)
-  window.OneSignal.showNativePrompt();
+  console.log((window as any).OneSignal);
+  (window as any).OneSignal.showNativePrompt();
 }
 const msg = ref('Hello Vue 3 + Vite + Firebase!');
 // TODO: Add SDKs for Firebase products that you want to use
