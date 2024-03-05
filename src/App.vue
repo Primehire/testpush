@@ -5,6 +5,9 @@
   <button class="button" @click="showPrompt">
     showPrompt
   </button>
+  <button class="button" @click="checkStatus">
+    checkStatus
+  </button>
 
 
 </template>
@@ -14,6 +17,23 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import { ref } from 'vue';
+
+function checkStatus() {
+  (window as any).OneSignalDeferred.push((OneSignal: any) => {
+    OneSignal.push(function () {
+      // Check if the user is subscribed
+      OneSignal.isPushNotificationsEnabled((isEnabled: boolean) => {
+        if (isEnabled) {
+          // User is subscribed
+          msg.value = "You are subscribed to notifications.";
+        } else {
+          // User is not subscribed
+          msg.value = "You are not subscribed to notifications.";
+        }
+      });
+    });
+  })
+}
 function showPrompt() {
   (window as any).OneSignalDeferred.push((OneSignal: any) => {
     // OneSignal.context.promptsManager.internalShowNativePrompt()
