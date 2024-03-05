@@ -20,18 +20,17 @@ import { ref } from 'vue';
 
 function checkStatus() {
   (window as any).OneSignalDeferred.push((OneSignal: any) => {
-    OneSignal.push(function () {
-      // Check if the user is subscribed
-      OneSignal.isPushNotificationsEnabled((isEnabled: boolean) => {
-        if (isEnabled) {
-          // User is subscribed
-          msg.value = "You are subscribed to notifications.";
-        } else {
-          // User is not subscribed
-          msg.value = "You are not subscribed to notifications.";
-        }
-      });
+
+    OneSignal.isPushNotificationsEnabled((isEnabled: boolean) => {
+      if (isEnabled) {
+        // User is subscribed
+        msg.value = "You are subscribed to notifications.";
+      } else {
+        // User is not subscribed
+        msg.value = "You are not subscribed to notifications.";
+      }
     });
+
   })
 }
 function showPrompt() {
