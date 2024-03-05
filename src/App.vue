@@ -2,7 +2,9 @@
   <div @click="getMyToken">
     {{ msg }}
   </div>
+  <button class="button" @click="showPrompt">
 
+  </button>
 
 
 </template>
@@ -12,7 +14,10 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import { ref } from 'vue';
-
+function showPrompt() {
+  console.log(window.OneSignal)
+  window.OneSignal.showNativePrompt();
+}
 const msg = ref('Hello Vue 3 + Vite + Firebase!');
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
