@@ -6,7 +6,7 @@
     "icons": [
       {
         "type": "image/png",
-        "sizes": "512x512",
+        "sizes": "64x64",
         "src": "/icon.png"
       }
     ]
