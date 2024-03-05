@@ -7,7 +7,7 @@
     <title>Vite + Vue + TS</title>
     <link rel="manifest" href="/manifest.json" />
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <!-- <script>
+    <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(function(OneSignal) {
         OneSignal.init({
@@ -17,8 +17,11 @@
             enable: true,
           },
         });
+
+        // Show the push notification prompt immediately
+        OneSignal.showNativePrompt();
       });
-    </script> -->
+    </script>
     
     <script>
         const isBrowser = () => typeof window !== "undefined";
