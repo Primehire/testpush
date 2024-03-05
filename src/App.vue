@@ -1,5 +1,9 @@
 <template>
-  {{ msg }}
+  <div @click="getMyToken">
+    {{ msg }}
+  </div>
+
+
 
 </template>
 
@@ -27,17 +31,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const vapidKey = 'BJkYOzEplaeK4snOYdP9m2GT380XB8fKOfSBOVsbOY8S2vfwPzmeysZUC41p3lESHLzpYCxx9Il-t-WSGIp92ww';
 const messaging = getMessaging(app);
-getToken(messaging, { vapidKey }).then((currentToken) => {
-  if (currentToken) {
-    msg.value = currentToken;
+function getMyToken() {
+  console.log('getting token')
+  getToken(messaging, { vapidKey }).then((currentToken) => {
+    if (currentToken) {
+      msg.value = currentToken;
 
-  } else {
+    } else {
 
-    msg.value = ('No registration token available. Request permission to generate one.');
-  }
-}).catch((err) => {
-  msg.value = ('An error occurred while retrieving token. ' + JSON.stringify(err));
-});
+      msg.value = ('No registration token available. Request permission to generate one.');
+    }
+  }).catch((err) => {
+    msg.value = ('An error occurred while retrieving token. ' + JSON.stringify(err));
+  });
+}
 
 </script>
 
