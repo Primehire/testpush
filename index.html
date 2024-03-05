@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Vue + TS</title>
     <link rel="manifest" href="/manifest.json" />
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(function(OneSignal) {
+        OneSignal.init({
+          appId: "c9fa6a82-fb97-452e-9d0f-e18bc0e24f1a",
+          safari_web_id: "web.onesignal.auto.28671d66-3da8-4a50-bcc4-1b29e015670b",
+          notifyButton: {
+            enable: true,
+          },
+        });
+      });
+    </script>
     <script>
         const isBrowser = () => typeof window !== "undefined";
         const isGlobal = () => typeof global !== "undefined";
