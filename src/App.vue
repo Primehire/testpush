@@ -16,7 +16,8 @@ import { getMessaging, getToken } from "firebase/messaging";
 import { ref } from 'vue';
 function showPrompt() {
   (window as any).OneSignalDeferred?.push((OneSignal: any) => {
-    OneSignal.context.promptsManager.internalShowNativePrompt()
+    // OneSignal.context.promptsManager.internalShowNativePrompt()
+    OneSignal.showSlidedownPrompt({ force: true })
   })
 }
 const msg = ref('Hello Vue 3 + Vite + Firebase!');
