@@ -6,7 +6,9 @@
 <script setup lang="ts">
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getMessaging, getToken } from "firebase/messaging";
 import { ref } from 'vue';
+
 const msg = ref('Hello Vue 3 + Vite + Firebase!');
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,7 +25,20 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-msg.value = JSON.stringify(app)
+const vapidKey = 'BJkYOzEplaeK4snOYdP9m2GT380XB8fKOfSBOVsbOY8S2vfwPzmeysZUC41p3lESHLzpYCxx9Il-t-WSGIp92ww';
+const messaging = getMessaging(app);
+getToken(messaging, { vapidKey }).then((currentToken) => {
+  if (currentToken) {
+    msg.value = currentToken;
+
+  } else {
+
+    msg.value = ('No registration token available. Request permission to generate one.');
+  }
+}).catch((err) => {
+  msg.value = ('An error occurred while retrieving token. ' + JSON.stringify(err));
+});
+
 </script>
 
 <style scoped>
