@@ -22,15 +22,15 @@ function checkStatus() {
   (window as any).OneSignalDeferred.push((OneSignal: any) => {
     (window as any).ONI = OneSignal;
     msg.value = 'OneSignal is loaded as ONI';
-    // OneSignal.isPushNotificationsEnabled((isEnabled: boolean) => {
-    //   if (isEnabled) {
-    //     // User is subscribed
-    //     msg.value = "You are subscribed to notifications.";
-    //   } else {
-    //     // User is not subscribed
-    //     msg.value = "You are not subscribed to notifications.";
-    //   }
-    // });
+    OneSignal.context.subscriptionManager.isPushNotificationsEnabled((isEnabled: boolean) => {
+      if (isEnabled) {
+        // User is subscribed
+        msg.value = "You are subscribed to notifications.";
+      } else {
+        // User is not subscribed
+        msg.value = "You are not subscribed to notifications.";
+      }
+    });
 
   })
 }
