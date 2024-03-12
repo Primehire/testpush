@@ -19,19 +19,36 @@ const app = firebase.initializeApp({
 
 // Initialize messaging
 const messaging = firebase.messaging();
-// Listen to bg messages
-messaging.onBackgroundMessage((payload) => {
-  console.log("Received a bg message: ", payload);
 
-  const title = payload.notification.title;
-  const notification = {
-    body: "Notification Body",
-    icon: "/icons/favicon-32x32.png",
-  };
-
-  // Show notification when message received
-  self.registration.showNotification(title, notification);
+messaging.onBackgroundMessage(function (payload) {
+  if (!payload.hasOwnProperty("notification")) {
+    const notificationTitle = payload.data.title;
+    const notificationOptions = {
+      body: payload.data.body,
+      icon: payload.data.icon,
+      image: payload.data.image,
+    };
+    self.registration.showNotification(notificationTitle, notificationOptions);
+    self.addEventListener("notificationclick", function (event) {
+      const clickedNotification = event.notification;
+      clickedNotification.close();
+      event.waitUntil(clients.openWindow(payload.data.click_action));
+    });
+  }
 });
+// // Listen to bg messages
+// messaging.onBackgroundMessage((payload) => {
+//   console.log("Received a bg message: ", payload);
+
+//   const title = payload.notification.title;
+//   const notification = {
+//     body: "Notification Body",
+//     icon: "/icons/favicon-32x32.png",
+//   };
+
+//   // Show notification when message received
+//   self.registration.showNotification(title, notification);
+// });
 
 // importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
 // importScripts(
