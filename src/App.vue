@@ -42,11 +42,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const vapidKey = 'BJkYOzEplaeK4snOYdP9m2GT380XB8fKOfSBOVsbOY8S2vfwPzmeysZUC41p3lESHLzpYCxx9Il-t-WSGIp92ww';
 const messaging = getMessaging(app);
-
+(messaging as any).onMessage((payload: any) => {
+  msg.value = '1-Message received. ' + JSON.stringify(payload);
+})
 
 onMessage(messaging, (payload) => {
-  msg.value = 'Message received. ' + JSON.stringify(payload);
-  // ...
+  msg.value = '2-Message received. ' + JSON.stringify(payload);
 });
 async function checkStatus() {
   if (await Notification.requestPermission() === 'granted') {
