@@ -5,9 +5,6 @@
   <div class="message">
 
   </div>
-  <button class="button" @click="showPrompt">
-    showPrompt
-  </button>
   <button class="button" @click="checkStatus">
     checkStatus
   </button>
@@ -17,16 +14,11 @@
 
 <script setup lang="ts">
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+// import { initializeApp } from "firebase/app";
+// import { getToken } from "firebase/messaging";
 import { ref } from 'vue';
 
-async function showPrompt() {
-  const newToken = await getToken(messaging, {
-    vapidKey,
-  });
-  msg.value = newToken;
-}
+
 const msg = ref('Hello Vue 3 + Vite + Firebase!');
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -42,7 +34,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+(window as any).firebase.initializeApp(firebaseConfig);
 const vapidKey = 'BJkYOzEplaeK4snOYdP9m2GT380XB8fKOfSBOVsbOY8S2vfwPzmeysZUC41p3lESHLzpYCxx9Il-t-WSGIp92ww';
 const messaging = (window as any).firebase.messaging()
 // const messaging = getMessaging(app);
