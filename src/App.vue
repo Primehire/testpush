@@ -18,8 +18,11 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import { ref } from 'vue';
 
-function showPrompt() {
-
+async function showPrompt() {
+  const newToken = await getToken(messaging, {
+    vapidKey,
+  });
+  msg.value = newToken;
 }
 const msg = ref('Hello Vue 3 + Vite + Firebase!');
 // TODO: Add SDKs for Firebase products that you want to use
@@ -46,13 +49,6 @@ async function checkStatus() {
   } else {
     msg.value = 'No Permission';
   }
-
-}
-async function getMyToken() {
-  const newToken = await getToken(messaging, {
-    vapidKey,
-  });
-  msg.value = newToken;
 
 }
 
