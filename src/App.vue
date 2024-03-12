@@ -2,6 +2,9 @@
   <div>
     {{ msg }}
   </div>
+  <div class="message">
+
+  </div>
   <button class="button" @click="showPrompt">
     showPrompt
   </button>
@@ -41,19 +44,32 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const vapidKey = 'BJkYOzEplaeK4snOYdP9m2GT380XB8fKOfSBOVsbOY8S2vfwPzmeysZUC41p3lESHLzpYCxx9Il-t-WSGIp92ww';
-const messaging = getMessaging(app);
+const messaging = (window as any).firebase.messaging()
+// const messaging = getMessaging(app);
 
-
-onMessage(messaging, (payload) => {
-  msg.value = '2-Message received. ' + JSON.stringify(payload);
-});
 async function checkStatus() {
-  (messaging as any).onMessage((payload: any) => {
-    msg.value = '1-Message received. ' + JSON.stringify(payload);
+  messaging.getToken({ vapidKey }).then((currentToken: string) => {
+    if (currentToken) {
+      console.log(currentToken);
+      document.querySelector('body')!.append(currentToken)
+      msg.value = currentToken;
+    }
   })
-
-
 }
+messaging.onMessage((payload: string) => {
+  // if app is open and focus then notification data will receive here
+  // keep in mind if message receive here, it will not notify in background
+  // so here, use the message data however you want
+  console.log('Message received ', payload);
+  const messagesElement = document.querySelector('.message')!;
+  const dataHeaderElement = document.createElement('h5');
+  const dataElement = document.createElement('pre')!;
+  (dataElement as any).style = "overflow-x: hidden;"
+  dataHeaderElement.textContent = "Message Received:"
+  dataElement.textContent = JSON.stringify(payload, null, 2)
+  messagesElement.appendChild(dataHeaderElement)
+  messagesElement.appendChild(dataElement)
+})
 
 </script>
 
