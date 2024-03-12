@@ -18,23 +18,8 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import { ref } from 'vue';
 
-function checkStatus() {
-  (window as any).OneSignalDeferred.push(async (OneSignal: any) => {
-    (window as any).ONI = OneSignal;
-    msg.value = 'OneSignal is loaded as ONI';
-    if (await OneSignal.context.subscriptionManager.isPushNotificationsEnabled()) {
-      msg.value = "You are subscribed to notifications.";
-    } else {
-      msg.value = "You are not subscribed to notifications.";
-    }
-  })
-}
 function showPrompt() {
-  (window as any).OneSignalDeferred.push((OneSignal: any) => {
-    // OneSignal.context.promptsManager.internalShowNativePrompt()
-    OneSignal.Slidedown.promptPush()
-    // OneSignal.context.showSlidedownPrompt({ force: true })
-  })
+
 }
 const msg = ref('Hello Vue 3 + Vite + Firebase!');
 // TODO: Add SDKs for Firebase products that you want to use
@@ -54,12 +39,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const vapidKey = 'BJkYOzEplaeK4snOYdP9m2GT380XB8fKOfSBOVsbOY8S2vfwPzmeysZUC41p3lESHLzpYCxx9Il-t-WSGIp92ww';
 const messaging = getMessaging(app);
+
+async function checkStatus() {
+  if (await Notification.requestPermission() === 'granted') {
+    msg.value = 'Permission Granted, getting token...';
+  } else {
+    msg.value = 'No Permission';
+  }
+
+}
 async function getMyToken() {
-  console.log('getting token')
   const newToken = await getToken(messaging, {
     vapidKey,
   });
   msg.value = newToken;
+
 }
 
 </script>
