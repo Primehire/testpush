@@ -5,7 +5,6 @@ importScripts(
 importScripts(
   "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging-compat.js"
 );
-console.log("InitializedMessaging");
 
 // Initialize app
 
@@ -19,7 +18,7 @@ const app = firebase.initializeApp({
 });
 
 // Initialize messaging
-
+const messaging = firebase.messaging();
 // Listen to bg messages
 messaging.onBackgroundMessage((payload) => {
   console.log("Received a bg message: ", payload);
