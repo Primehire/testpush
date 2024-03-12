@@ -19,8 +19,7 @@ const app = firebase.initializeApp({
 });
 
 // Initialize messaging
-const messaging = firebase.messaging();
-console.log(messaging);
+
 // Listen to bg messages
 messaging.onBackgroundMessage((payload) => {
   console.log("Received a bg message: ", payload);

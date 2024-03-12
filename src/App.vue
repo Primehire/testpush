@@ -1,5 +1,5 @@
 <template>
-  <div @click="getMyToken">
+  <div>
     {{ msg }}
   </div>
   <button class="button" @click="showPrompt">
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { ref } from 'vue';
 
 async function showPrompt() {
@@ -43,6 +43,11 @@ const app = initializeApp(firebaseConfig);
 const vapidKey = 'BJkYOzEplaeK4snOYdP9m2GT380XB8fKOfSBOVsbOY8S2vfwPzmeysZUC41p3lESHLzpYCxx9Il-t-WSGIp92ww';
 const messaging = getMessaging(app);
 
+
+onMessage(messaging, (payload) => {
+  msg.value = 'Message received. ' + JSON.stringify(payload);
+  // ...
+});
 async function checkStatus() {
   if (await Notification.requestPermission() === 'granted') {
     msg.value = 'Permission Granted, getting token...';
