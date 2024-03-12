@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="width: 100%;">
     {{ msg }}
   </div>
-  <div class="message">
+  <div class="message" style="width: 100%;">
 
   </div>
   <button class="button" @click="checkStatus">
