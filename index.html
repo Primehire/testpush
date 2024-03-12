@@ -14,41 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Vue + TS</title>
     <link rel="manifest" href="/manifest.json" />
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"></script>
-    <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      OneSignalDeferred.push(function(OneSignal) {
-        OneSignal.init({
-          appId: "c9fa6a82-fb97-452e-9d0f-e18bc0e24f1a",
-          safari_web_id: "web.onesignal.auto.28671d66-3da8-4a50-bcc4-1b29e015670b",
-          notifyButton: {
-            enable: true,
-          },
-          promptOptions: {
-            slidedown: {
-              prompts: [
-                {
-                  type: "push", // current types are "push" & "category"
-                  autoPrompt: true,
-                  text: {
-                    /* limited to 90 characters */
-                    actionMessage: "We'd like to show you notifications for the latest news and updates.",
-                    /* acceptButton limited to 15 characters */
-                    acceptButton: "Allow",
-                    /* cancelButton limited to 15 characters */
-                    cancelButton: "Cancel"
-                  },
-                  delay: {
-                    pageViews: 1,
-                    timeDelay: 20
-                  }
-                }
-              ]
-            }
-          }
-        });
-      });
-    </script>
     
     <script>
         const isBrowser = () => typeof window !== "undefined";
